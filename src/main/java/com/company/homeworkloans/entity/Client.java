@@ -1,6 +1,7 @@
 package com.company.homeworkloans.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
@@ -23,7 +24,6 @@ public class Client {
     private UUID id;
 
     @NotNull
-    @InstanceName
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
@@ -86,5 +86,11 @@ public class Client {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @InstanceName
+    @DependsOnProperties({"firstName", "lastName"})
+    public String getInstanceName() {
+        return String.format("%s %s", firstName, lastName);
     }
 }
