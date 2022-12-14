@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://requestloanScreen.caption">
+    <actions>
+        <action id="openDialogAction" caption="Open a screen as modal dialog"/>
+        <action id="openLookupAction" caption="Open a lookup screen"/>
+    </actions>
+    <facets>
+    <screen id="actionScreen"
+            openMode="DIALOG"
+            screenId="Client.browse"
+            onAction="openDialogAction"/>
+    </facets>
+    <layout>
+        <vbox spacing="true" width="250px">
+        <button id="openDialogBtn"
+                action="openDialogAction"
+                width="100%"/>
+        </vbox>
+    </layout>
+</window>

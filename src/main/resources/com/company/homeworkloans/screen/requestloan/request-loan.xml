@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://requestLoan.caption">
+    <data readOnly="true">
+        <instance id="LoanDc"
+                  class="com.company.homeworkloans.entity.Loan">
+            <loader id="clientsDl">
+                <query>
+                    <![CDATA[select e from Loan e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_local">
+                <property name="client" fetchPlan="_local"/>
+            </fetchPlan>
+        </instance>
+        <collection id="clientsDc"
+                    class="com.company.homeworkloans.entity.Client">
+            <fetchPlan extends="_base"/>
+            <loader id="clientsDl">
+                <query>
+                    <![CDATA[select e from Client e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <actions>
+        <action id="Request"
+                caption="Request"/>
+        <action id="Cancel"
+                caption="Cancel"/>
+    </actions>
+    <dialogMode height="300"
+                width="450"/>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <layout>
+        <gridLayout spacing="true">
+            <columns count="4"/>
+            <rows>
+                <row>
+                    <hbox spacing="true">
+                        <buttonsPanel id="buttonsPanel"
+                                      alwaysVisible="true">
+                            <entityComboBox id = "lookupBox" caption="Client"
+                                            dataContainer="LoanDc" optionsContainer="clientsDc"
+                                            property="client">
+                                <actions>
+                                    <action id="lookup" type="entity_lookup"/>
+                                    <action id="clear" type="entity_clear"/>
+                                </actions>
+                            </entityComboBox>
+                        </buttonsPanel>
+                    </hbox>
+                </row>
+                <row>
+                    <textField id="Amount" caption="msg:///Amount" datatype="decimal"
+                               dataContainer="LoanDc"
+                               property="amount">
+                        <validators>
+                            <decimalMin value="0" inclusive="true"/>
+                        </validators>
+                    </textField>
+                </row>
+                <row>
+                    <button action="Request" icon="SAVE"/>
+                    <button action="Cancel" icon="DIALOG_CANCEL"/>
+                </row>
+            </rows>
+        </gridLayout>
+    </layout>
+</window>
